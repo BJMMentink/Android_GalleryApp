@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GalleryApp</string>
+    <string name="resident_evil_4_remake">Resident Evil 4 Remake</string>
+    <string name="prey">Prey</string>
+    <string name="red_dead_redemption_2">Red Dead Redemption 2</string>
+    <string name="select_game">Select Game</string>
+</resources>

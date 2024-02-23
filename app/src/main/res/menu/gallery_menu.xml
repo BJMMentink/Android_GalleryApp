@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_select_game"
+        android:title="@string/select_game"
+        app:showAsAction="never" />
+
+    <group>
+        <item
+            android:id="@+id/game_rdr2"
+            android:title="@string/red_dead_redemption_2" />
+        <item
+            android:id="@+id/game_prey"
+            android:title="@string/prey" />
+        <item
+            android:id="@+id/game_re4"
+            android:title="@string/resident_evil_4_remake" />
+    </group>
+
+</menu>
