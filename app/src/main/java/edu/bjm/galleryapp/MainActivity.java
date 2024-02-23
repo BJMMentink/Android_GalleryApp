@@ -150,29 +150,55 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         String message;
 
         try {
-            if(isFront){
-                message = "go to back";
-                imgGallery.setImageResource(imgs[galleryNo + 3]);
-                tvGallery.setTextSize(getResources().getDimension(R.dimen.back_text_size));
-                tvGallery.setText(games[galleryNo].getDescription());
-                tvGallery.setTextColor(getResources().getColor(R.color.back_color));
-            }
-            else {
-                message = "go to front";
-                imgGallery.setImageResource(imgs[galleryNo]);
-                tvGallery.setTextSize(getResources().getDimension(R.dimen.front_text_size));
-                tvGallery.setText(games[galleryNo].getName());
-                tvGallery.setTextColor(getResources().getColor(R.color.front_color));
-            }
-            isFront = !isFront;
-            Log.d(TAG, "onSingleTapUp: " + message);
-        }catch (Exception e){
+            Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    try {
+                        if(isFront){
+                            imgGallery.setImageResource(imgs[galleryNo + 3]);
+                            tvGallery.setTextSize(getResources().getDimension(R.dimen.back_text_size));
+                            tvGallery.setText(games[galleryNo].getDescription());
+                            tvGallery.setTextColor(getResources().getColor(R.color.back_color));
+                        }
+                        else {
+                            imgGallery.setImageResource(imgs[galleryNo]);
+                            tvGallery.setTextSize(getResources().getDimension(R.dimen.front_text_size));
+                            tvGallery.setText(games[galleryNo].getName());
+                            tvGallery.setTextColor(getResources().getColor(R.color.front_color));
+                        }
+                        isFront = !isFront;
+
+                        Animation fadeIn = AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in);
+                        imgGallery.startAnimation(fadeIn);
+                        tvGallery.startAnimation(fadeIn);
+
+                    } catch (Exception e){
+                        Log.e(TAG, "onSingleTapUp: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+            });
+
+            // Apply fade out animation to views
+            imgGallery.startAnimation(fadeOut);
+            tvGallery.startAnimation(fadeOut);
+
+            Log.d(TAG, "onSingleTapUp: " );
+        } catch (Exception e){
             Log.e(TAG, "onSingleTapUp: " + e.getMessage());
             e.printStackTrace();
         }
 
         return false;
     }
+
     @Override
     public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float distanceX, float distanceY) {
         Log.d(TAG, "onScroll: ");
